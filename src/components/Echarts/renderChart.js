@@ -4,6 +4,7 @@ import toString from '../../util/toString';
 export default function renderChart(props) {
   const height = `${props.height || 400}px`;
   const width = props.width ? `${props.width}px` : 'auto';
+  const lastXIndex = props.option.xAxis && props.option.xAxis.data ? props.option.xAxis.data.length - 1 : 0
   return `
     document.getElementById('main').style.height = "${height}";
     document.getElementById('main').style.width = "${width}";
@@ -25,6 +26,15 @@ export default function renderChart(props) {
         return val;
       });
       window.postMessage(paramsString);
+    });
+     myChart.dispatchAction({  
+      type: 'showTip',
+      seriesIndex:0 ,
+      dataIndex: ${lastXIndex},
+    });
+    myChart.dispatchAction({  
+      type: 'highlight',
+      dataIndex: ${props.highlightIndex || props.highlightIndex === 0 ? props.highlightIndex : -1},
     });
   `
 }

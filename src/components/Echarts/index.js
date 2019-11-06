@@ -9,10 +9,15 @@ export default class App extends Component {
     super(props);
     this.setNewOption = this.setNewOption.bind(this);
   }
-  
+
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.option !== this.props.option) {
+    // 去掉之前通过option去reload图表，因为动态数据渲染会导致页面空白，所以新增needReload字段，为true时去reload图表，按需求自行控制
+    /*if(nextProps.option !== this.props.option) {
+      this.refs.chart.reload();
+    }*/
+
+    if (nextProps.needReload) {
       this.refs.chart.reload();
     }
   }
