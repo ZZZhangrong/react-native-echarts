@@ -41,7 +41,13 @@ export default class App extends Component {
           }}
           scalesPageToFit={Platform.OS !== 'ios'}
           source={source}
-          onMessage={event => this.props.onPress ? this.props.onPress(JSON.parse(event.nativeEvent.data)) : null}
+          onMessage={event => {
+            if (event.nativeEvent.data === 'getChartRef') {
+              this.props.getChartRef(this.refs.chart)
+            } else {
+              this.props.onPress ? this.props.onPress(JSON.parse(event.nativeEvent.data)) : null
+            }
+          }}
         />
       </View>
     );
