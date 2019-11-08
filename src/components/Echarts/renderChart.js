@@ -35,7 +35,9 @@ export default function renderChart(props) {
       }
     });
     if (${getChartRef}) {
-     window.postMessage('getChartRef')
+      setTimeout(function () {
+         window.postMessage('getChartRef')
+      }, 0)
     }
     myChart.on('click', function(params) {
       var seen = [];
@@ -58,7 +60,7 @@ export default function renderChart(props) {
           dataIndex: params.dataIndex
       });
     });
-     myChart.dispatchAction({  
+    myChart.dispatchAction({  
       type: 'showTip',
       seriesIndex:0 ,
       dataIndex: ${lastXIndex},
